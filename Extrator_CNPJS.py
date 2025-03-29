@@ -1,3 +1,8 @@
+# Esse código acessa o repositório de CNPJs em https://arquivos.receitafederal.gov.br/dados/cnpj/dados_abertos_cnpj/
+# faz o download de todos os arquivos ZIP disponíveis e então os salva na pasta armazenada na variável "destino"
+# Autor: Evandro Gomes Ferreira
+# Conteúdo do TCC do MBA em Data Science da USP Esalq
+
 import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
