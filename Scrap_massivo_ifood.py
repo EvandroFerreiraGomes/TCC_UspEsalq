@@ -1,6 +1,5 @@
-# Esse código automatiza a navegação por uma lista de links do iFood armazenados em um arquivo .txt,
-# captura o conteúdo visível da página com CTRL+A e CTRL+C e salva em arquivos sequenciais .txt
-# o objetivo é realizar o scraping massivo e posteriormente o tratamento através de outro algoritmo
+# Este código automatiza a navegação por links do iFood, clica no botão "Ver mais",
+# copia o conteúdo visível da página e salva em arquivos .txt
 # Autor: Evandro Gomes Ferreira
 # Conteúdo do TCC do MBA em Data Science da USP Esalq
 
@@ -9,6 +8,9 @@ import pyautogui
 import pyperclip
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
 # CONFIG CAMINHOS
@@ -24,9 +26,18 @@ for i, url in enumerate(links, start=1):
     try:
         print(f'Link {i}/{len(links)}: {url}')
         driver.get(url)
-        time.sleep(6)  # Aguarda carregar
+        time.sleep(3)  # tempo para carregar os elementos iniciais da página
 
-        pyautogui.click(x=500, y=300)
+        try:
+            botao_ver_mais = WebDriverWait(driver, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Ver mais')]"))
+            )
+            botao_ver_mais.click()
+            print("Botão 'Ver mais' clicado.")
+            time.sleep(1)
+        except:
+            print("Botão 'Ver mais' não encontrado ou já visível.")
+
         time.sleep(0.5)
         pyautogui.hotkey('ctrl', 'a')
         time.sleep(0.5)
@@ -46,4 +57,4 @@ for i, url in enumerate(links, start=1):
         continue
 
 driver.quit()
-print('\n Finalizado')
+print('\nFinalizado')
