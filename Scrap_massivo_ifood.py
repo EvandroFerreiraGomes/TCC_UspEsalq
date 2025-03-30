@@ -1,5 +1,7 @@
 # Este código automatiza a navegação por links do iFood, clica no botão "Ver mais",
 # copia o conteúdo visível da página e salva em arquivos .txt
+# necessário o chromedriver, disponível em:
+# https://storage.googleapis.com/chrome-for-testing-public/134.0.6998.165/win64/chrome-win64.zip
 # Autor: Evandro Gomes Ferreira
 # Conteúdo do TCC do MBA em Data Science da USP Esalq
 
